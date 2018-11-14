@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.dangdang.com/schema/ddframe/reg
+        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+        http://www.dangdang.com/schema/ddframe/job
+        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+
+<!--<reg:zookeeper  id="regCenter" server-lists="${elaticjob.zookeeper.server-lists}" namespace="elajob"-->
+               <!--base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3"></reg:zookeeper>-->
+
+<!--<job:simple id="simpleJob"    class="com.boot.zjy.job.SimpleElaJob" registry-center-ref="regCenter" cron="0/20 * * * * ?"  sharding-total-count="${elaticjob.simpleJob.sharding-total-count}" sharding-item-parameters="0=a"  event-trace-rdb-data-source="masterDruidDataSource">-->
+<!--<job:listener class="com.boot.zjy.job.listener.SimpleJobListener"></job:listener>-->
+
+        <!--</job:simple>-->
+
+    <!--<job:dataflow  id="elaDataflowJob" registry-center-ref="regCenter" class="com.boot.zjy.job.ElaDataflowJob" cron="0/10 * * * * ?" sharding-total-count="2" event-trace-rdb-data-source="masterDruidDataSource">-->
+
+    <!--</job:dataflow>-->
+
+
+</beans>

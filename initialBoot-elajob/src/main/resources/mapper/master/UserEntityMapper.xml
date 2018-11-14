@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.zjy.master.mapper.UserEntityMapper">
+  <resultMap id="BaseResultMap" type="com.boot.zjy.user.entity.UserEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="AGE" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CREATE_TIME, AGE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.boot.zjy.user.entity.UserEntityKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_USERINFO
+    where ID = #{id,jdbcType=BIGINT}
+      and NAME = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectListWithzone" parameterType="com.boot.zjy.user.entity.UserEntityKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_USERINFO
+    where
+     mod(ID,#{totalZone,jdbcType=BIGINT}) = #{zone,jdbcType=BIGINT}
+     limit 1000
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.boot.zjy.user.entity.UserEntityKey">
+    delete from T_USERINFO
+    where ID = #{id,jdbcType=BIGINT}
+      and NAME = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.boot.zjy.user.entity.UserEntity">
+    insert into T_USERINFO (ID, NAME, CREATE_TIME, 
+      AGE)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{age,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.zjy.user.entity.UserEntity">
+    insert into T_USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.zjy.user.entity.UserEntity">
+    update T_USERINFO
+    <set>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+      and NAME = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.zjy.user.entity.UserEntity">
+    update T_USERINFO
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      AGE = #{age,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+      and NAME = #{name,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
